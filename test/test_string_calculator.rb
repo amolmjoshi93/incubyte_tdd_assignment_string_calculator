@@ -28,6 +28,6 @@ class TestStringCalculator < Minitest::Test
   end
 
   def test_add_with_new_line_char
-    assert_equal 6, StringCalculator::Addition.perform("1\n2,3")
+    assert_equal 10, StringCalculator::Addition.perform("1\n2,3\n4")
   end
 end
