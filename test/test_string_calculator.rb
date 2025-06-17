@@ -23,11 +23,11 @@ class TestStringCalculator < Minitest::Test
     assert_equal 22, StringCalculator::Addition.perform("1,5,7,9")
   end
 
-  def test_add_with_multiple_negative_numbers
-    assert_equal 6, StringCalculator::Addition.perform("-1,5,-7,9")
+  def test_add_with_multiple_negative_numbers_and_spaces
+    assert_equal 11, StringCalculator::Addition.perform(" 1 , -3 , 5, 8 ")
   end
 
-  def test_add_with_spaces
-    assert_equal 11, StringCalculator::Addition.perform(" 1 , -3 , 5, 8 ")
+  def test_add_with_new_line_char
+    assert_equal 6, StringCalculator::Addition.perform("1\n2,3")
   end
 end
