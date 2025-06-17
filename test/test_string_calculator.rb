@@ -38,4 +38,11 @@ class TestStringCalculator < Minitest::Test
   def test_add_with_custom_multi_char_delimiter
     assert_equal 6, StringCalculator::Addition.perform("//;;;\n1;;;2;;;3")
   end
+
+  def test_add_with_custom_multi_char_delimiter_invalid
+    error = assert_raises(ArgumentError) do
+      StringCalculator::Addition.perform("//;;;\n1,2;;;3")
+    end
+    assert_match /Invalid characters/, error.message
+  end
 end
