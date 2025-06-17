@@ -20,6 +20,14 @@ class TestStringCalculator < Minitest::Test
   end
 
   def test_add_with_multiple_numbers
-    assert_equal 6, StringCalculator::Addition.perform("1,5")
+    assert_equal 22, StringCalculator::Addition.perform("1,5,7,9")
+  end
+
+  def test_add_with_multiple_negative_numbers
+    assert_equal 6, StringCalculator::Addition.perform("-1,5,-7,9")
+  end
+
+  def test_add_with_spaces
+    assert_equal 11, StringCalculator::Addition.perform(" 1 , -3 , 5, 8 ")
   end
 end
