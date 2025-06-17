@@ -7,7 +7,19 @@ class TestStringCalculator < Minitest::Test
     refute_nil ::StringCalculator::VERSION
   end
 
-  def test_it_does_something_useful
-    assert false
+  def test_add_with_empty_string
+    assert_equal 0, StringCalculator::Addition.perform("")
+  end
+
+  def test_add_with_nil
+    assert_equal 0, StringCalculator::Addition.perform(nil)
+  end
+
+  def test_add_with_one_number
+    assert_equal 1, StringCalculator::Addition.perform("1")
+  end
+
+  def test_add_with_multiple_numbers
+    assert_equal 6, StringCalculator::Addition.perform("1,5")
   end
 end
