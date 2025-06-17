@@ -3,6 +3,9 @@
 module StringCalculator
   class Addition
     def self.perform(numbers_str)
+      return 0 if numbers_str.nil? || numbers_str.strip.empty?
+
+      numbers_str.split(',').map(&:strip).map(&:to_i).sum
     end
   end
 end
