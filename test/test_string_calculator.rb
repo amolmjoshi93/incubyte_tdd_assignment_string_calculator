@@ -30,4 +30,12 @@ class TestStringCalculator < Minitest::Test
   def test_add_with_new_line_char
     assert_equal 10, StringCalculator::Addition.perform("1\n2,3\n4")
   end
+
+  def test_add_with_custom_delimiter
+    assert_equal 6, StringCalculator::Addition.perform("//;\n1;2;3")
+  end
+
+  def test_add_with_custom_multi_char_delimiter
+    assert_equal 6, StringCalculator::Addition.perform("//;;;\n1;;;2;;;3")
+  end
 end
