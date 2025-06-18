@@ -19,12 +19,15 @@ class TestStringCalculator < Minitest::Test
     assert_equal 1, StringCalculator::Addition.perform('1')
   end
 
-  def test_add_with_multiple_numbers
-    assert_equal 22, StringCalculator::Addition.perform('1,5,7,9')
+  def test_add_with_multiple_numbers_and_spaces
+    assert_equal 17, StringCalculator::Addition.perform(' 1 , 3 , 5, 8 ')
   end
 
   def test_add_with_multiple_negative_numbers_and_spaces
-    assert_equal 11, StringCalculator::Addition.perform(' 1 , -3 , 5, 8 ')
+    error = assert_raises(ArgumentError) do
+      StringCalculator::Addition.perform(' 1 , -3 , 5, 8 ')
+    end
+    assert_match(/negative numbers not allowed/, error.message)
   end
 
   def test_add_with_new_line_char
