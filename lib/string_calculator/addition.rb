@@ -10,12 +10,24 @@ module StringCalculator
       if numbers_str.start_with?('//')
         delimiter_str, numbers_str = numbers_str.split("\n", 2)
         delimiter = delimiter_str[2..]
-
-        unless numbers_str.match?(/\A(#{Regexp.escape(delimiter)}|\n|\d)+\z/)
-          raise ArgumentError, "Invalid characters found: Only digits, newline, and '#{delimiter}' allowed in custom mode"
-        end
+        validate_invalid_chars(numbers_str, delimiter)
       end
-      numbers_str.split(/#{delimiter}|\n/).map(&:strip).map(&:to_i).sum
+      process_numbers(numbers_str, delimiter)
+    end
+
+    def self.process_numbers(numbers_str, delimiter)
+      numbers_array = numbers_str.split(/#{delimiter}|\n/).map(&:strip).map(&:to_i)
+      negative_numbers = numbers_array.select(&:negative?)
+      raise ArgumentError, "negative numbers not allowed #{negative_numbers.join(", ")}" if negative_numbers.any?
+
+      numbers_array.sum
+    end
+
+    def self.validate_invalid_chars(numbers_str, delimiter)
+      return if numbers_str.match?(/\A(#{Regexp.escape(delimiter)}|\n|\d)+\z/)
+
+      raise ArgumentError,
+            "Invalid characters found: Only digits, newline, and '#{delimiter}' allowed in custom mode"
     end
   end
 end
